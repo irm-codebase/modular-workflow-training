@@ -19,6 +19,7 @@ with open(workflow.source_path("internal/settings.yaml"), "r") as f:
 
 # Add all your includes here.
 include: "rules/module_geo_boundaries.smk"
+include: "rules/module_powerplants.smk"
 
 
 # Add additional files to be delivered alongside the workflow here.
@@ -31,6 +32,9 @@ rule all:
         "Main snakemake rule."
     default_target: True
     input:
-        "resources/modules/geo_boundaries/results/shapes.parquet",
+        "modules/geo_boundaries/example/results/shapes.parquet",
+        "modules/geo_boundaries/MEX/results/shapes.parquet",
+        "modules/powerplants/results/MEX/aggregated/adjusted/fossil.parquet",
+        "modules/powerplants/results/MEX/aggregated/adjusted/hydropower.parquet"
     log:
         stderr="<logs>/all.stderr",
