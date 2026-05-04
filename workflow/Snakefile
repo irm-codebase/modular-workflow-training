@@ -5,16 +5,6 @@ from snakemake.utils import min_version, validate
 min_version("9.19")
 
 
-# !!!!! IMPORTANT !!!!!
-# Define pathvars for all user resource files and result files
-# This allows users to re-wire how the module is used in their workflow with ease.
-pathvars:
-    # User resources
-    user_message="<resources>/user/user_message.md",
-    # Module results
-    combined_text="<results>/combined_text.md"
-
-
 # Load the example configuration. This will be overridden by users.
 configfile: workflow.source_path("../config/config.yaml")
 
@@ -28,8 +18,8 @@ with open(workflow.source_path("internal/settings.yaml"), "r") as f:
 
 
 # Add all your includes here.
-include: "rules/automatic.smk"
-include: "rules/dummy.smk"
+include: "rules/module_geo_boundaries.smk"
+
 
 # Add additional files to be delivered alongside the workflow here.
 # This is needed e.g. for python code files that are never
@@ -38,13 +28,9 @@ include: "rules/dummy.smk"
 
 rule all:
     message:
-        "ERROR: Invalid `rule all:` call"
+        "Main snakemake rule."
     default_target: True
-    output:
-        "INVALID",
+    input:
+        "resources/modules/geo_boundaries/results/shapes.parquet",
     log:
         stderr="<logs>/all.stderr",
-    conda:
-        "envs/shell.yaml"
-    shell:
-        'echo "This workflow must be called as a snakemake module." > {log.stderr}'
