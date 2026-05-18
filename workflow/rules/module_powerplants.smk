@@ -7,10 +7,10 @@ module module_powerplants:
     snakefile: github("modelblocks-org/module_powerplants", path="workflow/Snakefile", branch="main")
     config: powerplants_config
     pathvars:
-        logs="modules/powerplants/logs",
-        resources="modules/powerplants/resources",
-        results="modules/powerplants/results",
-        shapes="modules/geo_boundaries/{shapes}/results/shapes.parquet"
+        logs="resources/modules/powerplants/logs",
+        resources="resources/modules/powerplants/resources",
+        results="resources/modules/powerplants/results",
+        shapes="resources/modules/geo_boundaries/{shapes}/results/shapes.parquet"
 
 use rule * from module_powerplants as module_powerplants_*
 

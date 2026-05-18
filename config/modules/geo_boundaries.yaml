@@ -8,11 +8,11 @@ example:
     geographic: "epsg:4326"
   countries:
     "JPN":
-      subtype: "1"
-      source: "gadm"
+      subtype: "country"
+      source: "overture"
     "KOR":
-      subtype: "2"
-      source: "gadm"
+      subtype: "region"
+      source: "overture"
 MEX:
   overture_release: "latest"
   voronoi_eez:
@@ -23,5 +23,5 @@ MEX:
     geographic: "epsg:4326"
   countries:
     "MEX":
-      subtype: "2"
-      source: "gadm"
+      subtype: "region"
+      source: "overture"

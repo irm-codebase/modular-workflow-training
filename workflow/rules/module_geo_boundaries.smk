@@ -11,7 +11,7 @@ for scenario in geo_boundaries_config.keys():
         config: geo_boundaries_config[scenario]
         snakefile: github("modelblocks-org/module_geo_boundaries", path="workflow/Snakefile", tag="v0.2.1")
         pathvars:
-            logs=f"modules/geo_boundaries/{scenario}/logs",
-            resources=f"modules/geo_boundaries/{scenario}/resources",
-            results=f"modules/geo_boundaries/{scenario}/results",
+            logs=f"resources/modules/geo_boundaries/{scenario}/logs",
+            resources=f"resources/modules/geo_boundaries/{scenario}/resources",
+            results=f"resources/modules/geo_boundaries/{scenario}/results",
     use rule * from name as alias*

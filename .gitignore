@@ -23,7 +23,6 @@ gurobi.log
 
 # Ignore mutable folders
 **/logs/*
-**/modules/*
 **/resources/*
 **/results/*
 **/temp/*
