@@ -32,8 +32,7 @@ rule all:
         "Main snakemake rule."
     default_target: True
     input:
-        "resources/modules/geo_boundaries/example/results/shapes.parquet",
-        "resources/modules/geo_boundaries/MEX/results/shapes.parquet",
+        "resources/modules/powerplants/results/japan_korea/aggregated/adjusted/wind.parquet",
         "resources/modules/powerplants/results/MEX/aggregated/adjusted/fossil.parquet",
         "resources/modules/powerplants/results/MEX/aggregated/adjusted/hydropower.parquet"
     log:

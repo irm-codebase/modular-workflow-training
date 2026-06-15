@@ -10,7 +10,7 @@ module module_powerplants:
         logs="resources/modules/powerplants/logs",
         resources="resources/modules/powerplants/resources",
         results="resources/modules/powerplants/results",
-        shapes="resources/modules/geo_boundaries/{shapes}/results/shapes.parquet"
+        shapes="resources/modules/geo_boundaries/results/{shapes}/shapes.parquet"
 
 use rule * from module_powerplants as module_powerplants_*
 

@@ -1,27 +1,25 @@
-example:
-  overture_release: "latest"
-  voronoi_eez:
-    enabled: True
-    sample_spacing: 10000 # sample every 10 km
-  crs:
-    projected: "epsg:3857"
-    geographic: "epsg:4326"
-  countries:
-    "JPN":
-      subtype: "country"
-      source: "overture"
-    "KOR":
-      subtype: "region"
-      source: "overture"
-MEX:
-  overture_release: "latest"
-  voronoi_eez:
-    enabled: True
-    sample_spacing: 10000 # sample every 10 km
-  crs:
-    projected: "epsg:3857"
-    geographic: "epsg:4326"
-  countries:
-    "MEX":
-      subtype: "region"
-      source: "overture"
+overture_release: "latest"
+voronoi_eez:
+  enabled: False
+crs:
+  projected: "epsg:3857"
+  geographic: "epsg:4326"
+scenarios:
+  japan_korea:
+    countries:
+      "JPN":
+        subtype: "country"
+        source: "overture"
+      "KOR":
+        subtype: "region"
+        source: "overture"
+  MEX:
+    voronoi_eez:
+      enabled: True
+      sample_spacing: 10000 # sample every 10 km
+    crs:
+      projected: EPSG:6362
+    countries:
+      "MEX":
+        subtype: "region"
+        source: "overture"
