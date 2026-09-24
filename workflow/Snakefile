@@ -5,35 +5,34 @@ from snakemake.utils import min_version, validate
 min_version("9.19")
 
 
-# Load the example configuration. This will be overridden by users.
+# Load the minimal example configuration.
 configfile: workflow.source_path("../config/config.yaml")
 
 
 # Validate the configuration using the schema file.
 validate(config, workflow.source_path("internal/config.schema.yaml"))
 
-# Load internal settings separately so users cannot modify them.
+# Load internal (non user configurable) settings separately to keep them protected.
 with open(workflow.source_path("internal/settings.yaml"), "r") as f:
     internal = yaml.safe_load(f)
 
 
-# Add all your includes here.
+# Add all your Snakemake includes here.
 include: "rules/module_geo_boundaries.smk"
-include: "rules/module_powerplants.smk"
 
 
-# Add additional files to be delivered alongside the workflow here.
-# This is needed e.g. for python code files that are never
-# explicitly used as a script or input in a snakemake rule.
-# e.g.: workflow.source_path("scripts/_utils.py")
+# include: "rules/module_powerplants.smk"
+
 
 rule all:
-    message:
-        "Main snakemake rule."
     default_target: True
-    input:
-        "resources/modules/powerplants/results/japan_korea/aggregated/adjusted/wind.parquet",
-        "resources/modules/powerplants/results/MEX/aggregated/adjusted/fossil.parquet",
-        "resources/modules/powerplants/results/MEX/aggregated/adjusted/hydropower.parquet"
+    output:
+        "INVALID",
     log:
         stderr="<logs>/all.stderr",
+    conda:
+        "envs/module.yaml"
+    message:
+        "ERROR: Invalid `rule all:` call"
+    shell:
+        'echo "This workflow must be called as a snakemake module." > {log.stderr}'

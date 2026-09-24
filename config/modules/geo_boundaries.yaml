@@ -1,25 +1,34 @@
-overture_release: "latest"
-voronoi_eez:
-  enabled: False
 crs:
   projected: "epsg:3857"
   geographic: "epsg:4326"
 scenarios:
-  japan_korea:
+  PORTUGAL:  # Portugal, with Azores and Madeira
+    voronoi_eez:
+      enabled: False
+    crs:
+      projected: EPSG:3035  # ETRS89-extended / LAEA Europe
     countries:
-      "JPN":
-        subtype: "country"
-        source: "overture"
-      "KOR":
-        subtype: "region"
-        source: "overture"
-  MEX:
+      "PRT":
+        subtype: "3"
+        source: "nuts"
+        resolution: 01M
+        year: 2024
+        extra_eez: [8361, 8363]
+  BALTIC:  # Baltic countries with disaggregated marine areas
     voronoi_eez:
       enabled: True
-      sample_spacing: 10000 # sample every 10 km
     crs:
-      projected: EPSG:6362
+      projected: EPSG:3035  # ETRS89-extended / LAEA Europe
     countries:
-      "MEX":
-        subtype: "region"
-        source: "overture"
+      "EST":
+        subtype: 0  # National
+        source: "geoboundaries"
+        release_type: "gbOpen"
+      "LTU":
+        subtype: 1 # Subnational
+        source: "geoboundaries"
+        release_type: "gbOpen"
+      "LVA":
+        subtype: 1 # Subnational
+        source: "geoboundaries"
+        release_type: "gbOpen"
