@@ -21,3 +21,12 @@ ruff = ">=0.9.9"
 snakefmt = ">=0.10.2"
 snakemake-minimal = ">=9.19.0"
 pytz = ">=2026.1.post1"
+click = ">=8.5.0"
+
+[tasks.rulegraph]
+cmd = "python tasks/render_graph.py rulegraph"
+description = "Render a rule graph showcasing each Snakemake rule executed"
+
+[tasks.modulegraph]
+cmd = "python tasks/render_graph.py modulegraph"
+description = "Render a module graph with module rules collapsed"

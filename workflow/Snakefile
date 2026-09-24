@@ -22,15 +22,14 @@ include: "rules/module_geo_boundaries.smk"
 include: "rules/module_powerplants.smk"
 
 
+POWERPLANTS = ["bioenergy", "fossil", "geothermal", "hydropower", "nuclear", "large_solar", "wind"]
+
 rule all:
     default_target: True
-    output:
-        "INVALID",
-    log:
-        stderr="<logs>/all.stderr",
-    conda:
-        "envs/module.yaml"
+    input:
+        expand(
+            "resources/powerplants/results/BALTIC/powerplants/unadjusted/{powerplants}.parquet",
+            powerplants=POWERPLANTS
+        ),
     message:
-        "ERROR: Invalid `rule all:` call"
-    shell:
-        'echo "This workflow must be called as a snakemake module." > {log.stderr}'
+        "Generate all files."
