@@ -7,10 +7,6 @@ category:
       "unknown": "bioenergy turbine"
 
   fossil:
-    excluded_ids:
-      # Remove all 'mobile' powerstations in Nigeria
-      - GEM_L100000408946-G100000413230
-      - GEM_L100000408946-G100000413232
     technology_mapping:
       coal:
         CFB: "coal turbine"
@@ -27,21 +23,21 @@ category:
         combined cycle: "ccgt"
         gas turbine: "ocgt"
         internal combustion: "reciprocating engine"
-        steam turbine: "steam turbine"
+        steam turbine: "ocgt"
         unknown: "ocgt"
 
   geothermal:
     technology_mapping:
-      "advanced geothermal systems (AGS)": "high enthalpy geothermal"
-      "binary cycle": "low enthalpy geothermal"
-      "dry steam": "high enthalpy geothermal"
-      "enhanced geothermal systems (EGS)": "high enthalpy geothermal"
-      "flash steam - double": "low enthalpy geothermal"
-      "flash steam - single": "high enthalpy geothermal"
-      "flash steam - triple": "low enthalpy geothermal"
-      "flash steam - unknown": "high enthalpy geothermal"
-      "geopressured geothermal system (GGS)": "high enthalpy geothermal"
-      "unknown": "high enthalpy geothermal"
+      "advanced geothermal systems (AGS)": "geothermal"
+      "binary cycle": "geothermal"
+      "dry steam": "geothermal"
+      "enhanced geothermal systems (EGS)": "geothermal"
+      "flash steam - double": "geothermal"
+      "flash steam - single": "geothermal"
+      "flash steam - triple": "geothermal"
+      "flash steam - unknown": "geothermal"
+      "geopressured geothermal system (GGS)": "geothermal"
+      "unknown": "geothermal"
 
   hydropower:
     technology_mapping:
@@ -53,6 +49,7 @@ category:
 
   nuclear:
     technology_mapping:
+      advanced boiling water reactor: "nuclear reactor"
       boiling water reactor: "nuclear reactor"
       fast breeder reactor: "nuclear reactor"
       fast neutron reactor: "nuclear reactor"
@@ -60,12 +57,13 @@ category:
       heavy water gas-cooled reactor: "nuclear reactor"
       heavy water light water reactor: "nuclear reactor"
       high temperature gas reactor: "nuclear reactor"
-      liquid-metal-cooled fast reactor: "nuclear reactor"
       light water graphite reactor: "nuclear reactor"
+      liquid-metal-cooled fast reactor: "nuclear reactor"
+      microreactor: "nuclear reactor"
       molten salt reactor: "nuclear reactor"
       pressurized heavy water reactor: "nuclear reactor"
       pressurized water reactor: "nuclear reactor"
-      small modular reactor: "nuclear reactor"
+      small modular reactor: "smr reactor"
       steam-generating heavy water reactor: "nuclear reactor"
       unknown: "nuclear reactor"
 
@@ -101,9 +99,8 @@ imputation:
       ccgt: "land"
       coal turbine: "land"
       concentrating solar power: "land"
-      high enthalpy geothermal: "land"
+      geothermal: "land"
       igcc: "land"
-      low enthalpy geothermal: "land"
       nuclear reactor: "land"
       ocgt: "land"
       offshore: "maritime"
@@ -112,29 +109,28 @@ imputation:
       reciprocating engine: "land"
       reservoir: "land"
       run of river: "land"
-      steam turbine: "land"
       utility pv: "land"
   time:
     scenario: "construction" # Options: historical->construction->pre_construction->announced
+    method: capacity_profile
     lifetime_years:
       # General lifetime assumptions. Adjust as needed!
       bioenergy turbine: 25
       ccgt: 20
       coal turbine: 50
       concentrating solar power: 25
-      high enthalpy geothermal: 30
+      geothermal: 30
       igcc: 25
-      low enthalpy geothermal: 30
       nuclear reactor: 50
       ocgt: 20
-      offshore: 25
-      onshore: 25
-      pumped storage: 80
+      offshore: 27
+      onshore: 27
+      pumped storage: 100
       reciprocating engine: 20
-      reservoir: 80
-      rooftop pv: 25
-      run of river: 80
-      steam turbine: 30
+      reservoir: 100
+      rooftop pv: 30
+      run of river: 100
+      smr reactor: 50
       utility pv: 25
     retirement_delay_years:
       # Assumed extension past reference year.
@@ -143,9 +139,8 @@ imputation:
       ccgt: 5
       coal turbine: 5
       concentrating solar power: 2
-      high enthalpy geothermal: 5
+      geothermal: 5
       igcc: 5
-      low enthalpy geothermal: 5
       nuclear reactor: 5
       ocgt: 5
       offshore: 2
@@ -155,5 +150,74 @@ imputation:
       reservoir: 10
       rooftop pv: 5
       run of river: 10
-      steam turbine: 5
+      smr reactor: 50
       utility pv: 2
+    planned_commissioning_year_windows:
+      bioenergy turbine:
+        construction: [1, 3]
+        pre-construction: [2, 5]
+        announced: [4, 8]
+      ccgt:
+        construction: [1, 3]
+        pre-construction: [2, 5]
+        announced: [4, 8]
+      coal turbine:
+        construction: [1, 3]
+        pre-construction: [2, 5]
+        announced: [4, 8]
+      concentrating solar power:
+        construction: [1, 4]
+        pre-construction: [3, 7]
+        announced: [5, 10]
+      geothermal:
+        construction: [2, 5]
+        pre-construction: [3, 7]
+        announced: [5, 10]
+      igcc:
+        construction: [2, 5]
+        pre-construction: [4, 8]
+        announced: [6, 12]
+      nuclear reactor:
+        construction: [3, 7]
+        pre-construction: [5, 13]
+        announced: [8, 18]
+      ocgt:
+        construction: [1, 3]
+        pre-construction: [2, 5]
+        announced: [4, 8]
+      offshore:
+        construction: [2, 5]
+        pre-construction: [3, 8]
+        announced: [5, 12]
+      onshore:
+        construction: [1, 3]
+        pre-construction: [2, 6]
+        announced: [3, 10]
+      pumped storage:
+        construction: [3, 8]
+        pre-construction: [5, 12]
+        announced: [8, 18]
+      reciprocating engine:
+        construction: [1, 3]
+        pre-construction: [2, 5]
+        announced: [4, 8]
+      reservoir:
+        construction: [3, 8]
+        pre-construction: [5, 12]
+        announced: [8, 18]
+      rooftop pv:
+        construction: [1, 2]
+        pre-construction: [2, 3]
+        announced: [3, 5]
+      run of river:
+        construction: [2, 6]
+        pre-construction: [4, 10]
+        announced: [6, 15]
+      smr reactor:
+        construction: [2, 6]
+        pre-construction: [4, 10]
+        announced: [7, 15]
+      utility pv:
+        construction: [1, 3]
+        pre-construction: [2, 5]
+        announced: [3, 8]

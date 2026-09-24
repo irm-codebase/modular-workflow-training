@@ -1,22 +1,30 @@
+# You can configure muliple 'shape' scenarios
+# All you need is:
+# - country_id in alpha3 (e.g., PRT -> Portugal)
+# - source: dataset to use (overture, nuts, geoboundaries, gadm)
+# - subtype: resolution (varies per dataset)
+#
+# Some sources might need extra parameters!
+# Check the link below for examples
+# https://github.com/modelblocks-org/module_geo_boundaries/blob/main/config/config.yaml
 crs:
   projected: "epsg:3857"
   geographic: "epsg:4326"
 scenarios:
   PORTUGAL:  # Portugal, with Azores and Madeira
-    voronoi_eez:
-      enabled: False
     crs:
       projected: EPSG:3035  # ETRS89-extended / LAEA Europe
     countries:
       "PRT":
-        subtype: "3"
+        subtype: "3" # Small regions
         source: "nuts"
         resolution: 01M
         year: 2024
-        extra_eez: [8361, 8363]
+        extra_eez: [8361, 8363]  # Exclusive economic zones for Azores and Madeira
+
   BALTIC:  # Baltic countries with disaggregated marine areas
     voronoi_eez:
-      enabled: True
+      enabled: True  # Split maritime exclusive economic zones to match subregions
     crs:
       projected: EPSG:3035  # ETRS89-extended / LAEA Europe
     countries:
