@@ -16,7 +16,7 @@ with open(workflow.source_path("../../config/modules/powerplants.yaml"), "r") as
 
 # As before, you need internet access to run this!
 module module_powerplants:
-    snakefile: github("modelblocks-org/module_powerplants", path="workflow/Snakefile", branch="fix/map-exploration")
+    snakefile: github("modelblocks-org/module_powerplants", path="workflow/Snakefile", branch="v0.1.1")
     config: config_powerplants
     pathvars:
         # Place files in a directory unique to this module...
