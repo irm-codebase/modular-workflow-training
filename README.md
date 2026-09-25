@@ -12,7 +12,7 @@ Default data processing steps:
 
 <!-- Example module output -->
 <p align="center">
-  <img src="./figures/modulegraph.png" width="60%">
+  <img src="./figures/modulegraph.png" width="50%">
   <br>
   <em>Default modules.</em>
 </p>

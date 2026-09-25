@@ -1,3 +1,2 @@
-# Nothing to see here!
-# This workflow does not define any rule or script.
-scenario: dummy_value
+# Area availability scenario to use when proxying PV rooftop distribution.
+scenario: baseline

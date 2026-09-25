@@ -1,7 +1,9 @@
 crs:
-  projected: "EPSG:8857"
+  projected: "EPSG:8857"  # WGS 84 / Equal Earth Greenwich
 
+# Settings per powerplant category
 category:
+  # Technology mappings allow you to rename and combine powerplant subtypes.
   bioenergy:
     technology_mapping:
       "unknown": "bioenergy turbine"
@@ -82,18 +84,27 @@ category:
       offshore: "offshore"
       onshore: "onshore"
 
-
+# Optional configuration to rename and combine fuels.
+# The module already provides a default mapping, seen in the link below.
+# https://github.com/modelblocks-org/module_powerplants/blob/main/workflow/internal/settings.yaml
 fuel_mapping:
   "bioenergy: unknown": "biomass"
   "coal: unknown": "brown coal"
   "fossil gas: unknown": "natural gas"
 
+# Assumptions and gap filling settings
 imputation:
+  # Assumptions related to powerplant location
   location:
+    # If true, clean up input shapes to remove overlaps
+    # keep false if your input shapes are already correct
     remove_shape_overlaps: false
-    inner_distance: 100  # matches projected CRS unit.
+    # Minimum distance from polygon borders to use when adjusting powerplant location.
+    inner_distance: 100  # 100 metres (matches the projected CRS unit).
+    # How to handle powerplants belonging to two polygons.
     on_overlap: "raise"  # either 'split_capacity', or 'raise'
-    on_shape_class_error: "drop"  # either 'drop', 'ignore', or 'raise'
+    # You can optionally assign powerplants to be landor maritime based.
+    # The module will adjust their position using a simple algorithm
     shape_class:
       bioenergy turbine: "land"
       ccgt: "land"
@@ -110,11 +121,15 @@ imputation:
       reservoir: "land"
       run of river: "land"
       utility pv: "land"
+    on_shape_class_error: "drop"  # either 'drop', 'ignore', or 'raise'
+
+  # Assumptions related to powerplant (de)comissioning
   time:
+    # Which future projects to include
     scenario: "construction" # Options: historical->construction->pre_construction->announced
     method: capacity_profile
     lifetime_years:
-      # General lifetime assumptions. Adjust as needed!
+      # Lifetime assumption to use when a plant's (de)comissioning date is unknown
       bioenergy turbine: 25
       ccgt: 20
       coal turbine: 50
@@ -152,6 +167,9 @@ imputation:
       run of river: 10
       smr reactor: 50
       utility pv: 2
+    # Comissioning window to use for future projects with unknown comissioning dates.
+    # Defined in relation to the module's dataset year (2024)
+    # Example: [2, 6) -> may be placed from 2026 and before 2030
     planned_commissioning_year_windows:
       bioenergy turbine:
         construction: [1, 3]

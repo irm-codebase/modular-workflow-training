@@ -15,7 +15,7 @@ with open(workflow.source_path("../../config/modules/area_potentials.yaml"), "r"
     config_area_potentials = yaml.safe_load(file.read())
 
 module module_area_potentials:
-    snakefile: github("modelblocks-org/module_area_potentials", path="workflow/Snakefile", branch="main")
+    snakefile: github("modelblocks-org/module_area_potentials", path="workflow/Snakefile", branch="v2.0.0")
     config: config_area_potentials
     pathvars:
         # Place files in a directory unique to this module...
