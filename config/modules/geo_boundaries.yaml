@@ -24,7 +24,8 @@ scenarios:
 
   BALTIC:  # Baltic countries with disaggregated marine areas
     voronoi_eez:
-      enabled: True  # Split maritime exclusive economic zones to match subregions
+      # Optional: split maritime exclusive economic zones to match subregions
+      enabled: True
     crs:
       projected: EPSG:3035  # ETRS89-extended / LAEA Europe
     countries:

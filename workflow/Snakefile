@@ -32,5 +32,6 @@ rule all:
             "resources/powerplants/results/BALTIC/powerplants/unadjusted/{powerplants}.parquet",
             powerplants=POWERPLANTS
         ),
+        # "resources/powerplants/results/BALTIC/aggregated/adjusted/solar.parquet",
     message:
         "Generate all files."

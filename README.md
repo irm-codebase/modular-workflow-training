@@ -17,8 +17,9 @@ Default data processing steps:
   <em>Default modules.</em>
 </p>
 
+## Instructions
 
-## Getting started
+### Getting started
 
 We use [`pixi`](https://pixi.sh/) as our software manager.
 Follow their [installation instructions](https://pixi.prefix.dev/latest/installation/) to get started.
@@ -36,20 +37,69 @@ cd modular_workflow_training/
 pixi install --all
 ```
 
-## Executing the workflow
+### Evaluate the modules
 
-For testing, simply run:
+This workflow includes three modules.
 
-```shell
-pixi run snakemake --cores 2  # cores: total CPU cores to give to Snakemake
-```
+- [Geo-boundaries](https://www.modelblocks.org/modules/module_geo_boundaries/): (sub)national boundaries for any nation.
+- [Powerplants](https://www.modelblocks.org/modules/module_powerplants/): disaggregated powerplant statistics and trends.
+- [Area potentials](https://www.modelblocks.org/modules/module_area_potentials/): custom available land area for renewable technologies.
 
-If you want to generate a particular file, just specify it.
+There are integrated with two main files:
+- `workflow/rules/`: Snakemake's call to the modules, file placement and "wiring".
+- `config/modules/`: per module configuration (settings, assumptions, parameters, etc.).
 
-```shell
-pixi run snakemake --cores 2 resources/geo_boundaries/results/BALTIC/shapes.parquet
-```
 
+### Brief example
+
+Each module generates files according to its [`INTERFACE`](https://github.com/modelblocks-org/module_geo_boundaries/blob/main/INTERFACE.yaml), [configuration](./config/modules/geo_boundaries.yaml), and ["wiring"](./workflow/rules/module_geo_boundaries.smk).
+
+
+Start by generating spatial boundaries for a particular regional scenario.
+
+1. Request a shape (`PORTUGAL` or `BALTIC`).
+
+    ```shell
+    pixi run snakemake --cores 2 resources/geo_boundaries/results/PORTUGAL/shapes.parquet
+    ```
+
+2. Request a report for that shape.
+
+    ```shell
+    pixi run snakemake -c 2 resources/geo_boundaries/results/PORTUGAL/shapes.parquet --report
+    ```
+
+Now, request powerplant data.
+The Powerplants module is already "wired" to the Geo-boundaries module (see [here](./workflow/rules/module_powerplants.smk)).
+
+1. Request disaggregated powerplant data for a category (`wind`, `fossil`, `nuclear`, `large_solar`, etc.).
+
+    ```shell
+    pixi run snakemake -c 2 resources/powerplants/results/PORTUGAL/powerplants/unadjusted/wind.parquet
+    ```
+2. Re-run your report request!
+
+    ```shell
+    pixi run snakemake -c 2 resources/powerplants/results/PORTUGAL/powerplants/unadjusted/wind.parquet --report
+    ```
+
+3. How are the modules "connected". Use `rulegraph` or `modulegraph` to find out!
+
+    ```shell
+    pixi run rulegraph \
+    --target=resources/powerplants/results/PORTUGAL/powerplants/unadjusted/wind.parquet
+    ```
+
+### Explore more options!
+
+Now that you have successfully ran these "default" modules, explore what else you can do!
+
+- Try integrating a new module by looking at their [interfaces](https://www.modelblocks.org/modules/), or...
+- The [Area potentials](https://www.modelblocks.org/modules/module_area_potentials/) module is nearly integrated in this project. Which files and "wires" are missing?
+
+> [!IMPORTANT]
+> The Area potentials module processes large spatial rasters.
+> Make sure you have a few GB available in your computer :wink:.
 
 ## `pixi` tasks
 
