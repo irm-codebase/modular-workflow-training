@@ -1,2 +1,3 @@
-# Minimal configuration. Nothing to see here!
-scenario: BALTIC
+# Nothing to see here!
+# This workflow does not define any rule or script.
+scenario: dummy_value

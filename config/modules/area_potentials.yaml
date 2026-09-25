@@ -1,0 +1,31 @@
+# Options for buffering: either a string of the form "epsg:xxxx" or "UTM"/"utm"
+# - "UTM": project each shape to the UTM zone of its centroid for buffering
+# - "epsg:xxxx": use the specified CRS for all buffering
+#   A good option is "epsg:8857" (WGS 84 / Equal Earth Greenwich) for global coverage
+buffer_crs: "epsg:8857"
+
+split_by: country_id  # likely country_id or shape_id
+
+scenarios:
+  # Define at least one scenario. Multiple scenarios can be used to study
+  # the effect of different assumptions on the results.
+  baseline:
+    techs:
+      pv_rooftop:
+        initial_area: settlement_area
+        continuous_layers:
+          settlement_share:
+            min: 0.01
+            max: 1
+            share: 0.8
+        binary_layers:
+          regions_maritime: 0
+          regions_land: 1
+          protected: 0
+          # Include all land cover types; selection is done by settlement_share
+          landcover_FARM: 1
+          landcover_FOREST: 1
+          landcover_URBAN: 1
+          landcover_OTHER: 1
+          landcover_NOT_SUITABLE: 0
+          landcover_WATER: 0

@@ -20,6 +20,7 @@ with open(workflow.source_path("internal/settings.yaml"), "r") as f:
 # Add all your Snakemake includes here.
 include: "rules/module_geo_boundaries.smk"
 include: "rules/module_powerplants.smk"
+include: "rules/module_area_potentials.smk"
 
 
 POWERPLANTS = ["bioenergy", "fossil", "geothermal", "hydropower", "nuclear", "large_solar", "wind"]

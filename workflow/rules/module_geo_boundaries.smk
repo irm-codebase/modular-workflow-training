@@ -1,4 +1,4 @@
-"""Simple import of the Modelblocks Geo-boundaries module.
+"""The Modelblocks Geo-boundaries module.
 
 This module specialises in creating high-resolution polygonal maps.
 You can create multiple scenarios, each with a mix of different countries at

@@ -1,4 +1,4 @@
-"""Modelblocks Powerplants module.
+"""The Modelblocks Powerplants module.
 
 This module cleans up powerplant data from the Global Energy Monitor (GEM) project.
 Eight different powerplant categories are supported:
@@ -26,8 +26,8 @@ module module_powerplants:
 
         # INPUTS
         # Our 'shapes' are the polygonal maps created by geo_boundaries
-        shapes="resources/geo_boundaries/results/{shapes}/shapes.parquet"
+        shapes="resources/geo_boundaries/results/{shapes}/shapes.parquet",
         # Rootop PV needs a proxy raster to estimate its distribution...
-        # proxy_rooftop_pv=
+        # proxy_rooftop_pv=f"resources/area_potentials/results/{{shapes}}/{config['scenario']}/area_potential_pv_rooftop.tif",
 
 use rule * from module_powerplants as module_powerplants_*
