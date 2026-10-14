@@ -27,13 +27,13 @@ Follow their [installation instructions](https://pixi.prefix.dev/latest/installa
 Once installed, clone or download this repository.
 
 ```shell
-git clone git@github.com:modelblocks-org/modular_workflow_training.git
+git clone git@github.com:irm-codebase/modular-workflow-training.git
 ```
 
 Once the code is in your machine, tell `pixi` to install the software dependencies.
 
 ```shell
-cd modular_workflow_training/
+cd modular-workflow-training/
 pixi install --all
 ```
 

@@ -1,5 +1,5 @@
 [workspace]
-name = "modular_workflow_training"
+name = "modular-workflow-training"
 authors = ["See AUTHORS file"]
 description = "A small example repository showcasing how to connect Modelblocks workflows."
 license = "Apache-2.0"

@@ -3,8 +3,8 @@
 # https://citation-file-format.github.io/
 cff-version: 1.2.0
 message: If you use this software or data produced by it, please cite it using the metadata from this file.
-title: "Modelblocks - modular_workflow_training: Modular workflow training"
-repository: "https://github.com/modelblocks-org/modular_workflow_training"
+title: "Modelblocks - modular-workflow-training: Modular workflow training"
+repository: "https://github.com/irm-codebase/modular-workflow-training"
 license: Apache-2.0
 authors:
   - given-names: Ivan
